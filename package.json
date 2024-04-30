@@ -2,6 +2,29 @@
   "name": "nbsh",
   "displayName": "notebook-shell-passthrough",
   "description": "allows running shell commands in a vscode notebook environment without selecting a kernel",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/witzbeck/nbsh"
+  },
+  "keywords": [
+    "notebook",
+    "shell",
+    "passthrough",
+    "jupyter",
+    "vscode",
+    "command",
+    "run",
+    "execute",
+    "terminal",
+    "bash",
+    "zsh",
+    "sh",
+    "fish",
+    "powershell",
+    "cmd",
+    "cmd.exe"
+  ],
+  "license": "MIT",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.88.0"
@@ -12,26 +35,34 @@
   "main": "./dist/extension.js",
   "contributes": {
     "languages": [
-      { "id": "jupyter", "extensions": [".ipynb"] }
+      {
+        "id": "jupyter",
+        "extensions": [
+          ".ipynb"
+        ]
+      }
     ],
     "commands": [
       {
         "command": "nbsh.helloWorld",
-        "title": "Hello World"
+        "title": "Hello World",
+        "description": "A sample command to show a hello world message."
       },
       {
         "command": "nbsh.runShell",
-        "title": "Run Shell Command"
+        "title": "Run Shell Command",
+        "description": "Runs a shell command directly from the notebook."
       },
       {
         "command": "nbsh.openNotebook",
-        "title": "Open Notebook"
+        "title": "Open Notebook",
+        "description": "Parses the notebook file and prepares shell commands for execution."
       }
     ]
   },
   "activationEvents": [
     "onLanguage:jupyter"
-],
+  ],
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
