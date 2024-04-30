@@ -10,6 +10,21 @@ type NotebookCell = {
 	execution_count?: number;  // Only relevant for code cells
 };
 
+const controller = vscode.notebooks.createNotebookController(
+	'shell-command-controller',
+	'jupyter-notebook',
+	'Shell Command Executor'
+);
+
+controller.supportsExecutionOrder = false;
+controller.executeHandler = (cells) => {
+	cells.forEach(cell => {
+		if (cell.document.getText().startsWith('!')) {
+			executeShellCommand(cell.document.getText().slice(1).trim());
+		}
+	});
+};
+
 function executeShellCommand(command: string) {
 	vscode.window.showInformationMessage(`Execute command: ${command}?`, 'Yes', 'No')
 		.then(answer => {
@@ -22,40 +37,40 @@ function executeShellCommand(command: string) {
 }
 
 function parseAndRunCommands(notebook: any) {
-    notebook.cells.forEach((cell: NotebookCell) => {
-        if (cell.cell_type === 'code') {
-            cell.source.forEach((line: string) => {
-                const trimmedLine = line.trim();
-                if (trimmedLine.startsWith('!')) {
-                    const command = trimmedLine.slice(1).trim();
-                    if (command) {  // Ensure the command is not empty
-                        executeShellCommand(command);
-                    }
-                }
-            });
-        }
-    });
+	notebook.cells.forEach((cell: NotebookCell) => {
+		if (cell.cell_type === 'code') {
+			cell.source.forEach((line: string) => {
+				const trimmedLine = line.trim();
+				if (trimmedLine.startsWith('!')) {
+					const command = trimmedLine.slice(1).trim();
+					if (command) {  // Ensure the command is not empty
+						executeShellCommand(command);
+					}
+				}
+			});
+		}
+	});
 }
 
 
 async function openNotebook(context: vscode.ExtensionContext) {
-    let disposable = vscode.commands.registerCommand('nbsh.openNotebook', async () => {
-        const editor = vscode.window.activeTextEditor;
-        if (editor && editor.document.fileName.endsWith('.ipynb')) {
-            try {
-                const uri = editor.document.uri;
-                const contentUint8 = await vscode.workspace.fs.readFile(uri);
-                const content = Buffer.from(contentUint8).toString('utf8');
-                const notebook = JSON.parse(content);
-                parseAndRunCommands(notebook);
-            } catch (error) {
-                vscode.window.showErrorMessage(`Failed to read or parse the notebook: ${error}`);
-            }
-        } else {
-            vscode.window.showErrorMessage('No active notebook file.');
-        }
-    });
-    context.subscriptions.push(disposable);
+	let disposable = vscode.commands.registerCommand('nbsh.openNotebook', async () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor && editor.document.fileName.endsWith('.ipynb')) {
+			try {
+				const uri = editor.document.uri;
+				const contentUint8 = await vscode.workspace.fs.readFile(uri);
+				const content = Buffer.from(contentUint8).toString('utf8');
+				const notebook = JSON.parse(content);
+				parseAndRunCommands(notebook);
+			} catch (error) {
+				vscode.window.showErrorMessage(`Failed to read or parse the notebook: ${error}`);
+			}
+		} else {
+			vscode.window.showErrorMessage('No active notebook file.');
+		}
+	});
+	context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is activated
