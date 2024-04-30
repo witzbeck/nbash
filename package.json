@@ -76,7 +76,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.6",
+    "@types/mocha": "^10.0.0",
     "@types/node": "18.x",
     "@types/vscode": "^1.88.0",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
@@ -90,6 +90,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "vscode": "^1.1.37"
+    "vscode": "^1.1.15"
   }
 }
