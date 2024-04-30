@@ -1,6 +1,7 @@
 {
   "name": "nbsh",
   "displayName": "notebook-shell-passthrough",
+  "icon": "images/icon.png",
   "description": "allows running shell commands in a vscode notebook environment without selecting a kernel",
   "repository": {
     "type": "git",
