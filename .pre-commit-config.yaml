@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0  # Use the latest revision
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v9.1.1  # Use the appropriate version for your project
+    hooks:
+      - id: eslint
+        args:
+          - --ext=.ts,.tsx
+        additional_dependencies: ['eslint@8.15.0']  # Ensure the version matches your project's ESLint
+
+  - repo: local
+    hooks:
+      - id: jest-tests
+        name: Run Jest Tests
+        entry: yarn test
+        language: system
+        pass_filenames: false
+      - id: build-project
+        name: Build Project
+        entry: yarn build
+        language: system
+        pass_filenames: false

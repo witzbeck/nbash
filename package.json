@@ -68,9 +68,10 @@
   ],
   "scripts": {
     "vscode:prepublish": "yarn package",
+    "build": "yarn compile && yarn package",
     "compile": "webpack",
     "watch": "webpack --watch & tsc -p . -w --outDir out",
-    "package": "webpack --mode production --devtool hidden-source-map",
+    "package": "webpack",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "yarn compile && yarn lint",

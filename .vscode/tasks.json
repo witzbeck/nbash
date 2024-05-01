@@ -1,5 +1,3 @@
-// See https://go.microsoft.com/fwlink/?LinkId=733558
-// for the documentation about the tasks.json format
 {
     "version": "2.0.0",
     "tasks": [
@@ -11,13 +9,9 @@
             "isBackground": true,
             "presentation": {
                 "reveal": "always",
-                "panel": "dedicated",
-                "group": "build"
+                "panel": "dedicated"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         },
         {
             "label": "npm: watch-tests",
@@ -27,10 +21,9 @@
             "isBackground": true,
             "presentation": {
                 "reveal": "always",
-                "panel": "dedicated",
-                "group": "build"
+                "panel": "dedicated"
             },
-            "group": "build"
+            "group": "test"
         },
         {
             "label": "npm: watch-all",
@@ -38,6 +31,89 @@
                 "npm: watch",
                 "npm: watch-tests"
             ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "test"
+            ],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "test:watch",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "test:watch"
+            ],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "test:coverage",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "test:coverage"
+            ],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "test:ci",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "test:ci"
+            ],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "lint"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint:fix",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "lint:fix"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run", "clean"
+            ],
+            "group": "none",
             "problemMatcher": []
         }
     ]
