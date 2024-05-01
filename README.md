@@ -1,6 +1,6 @@
-# nbsh README
+# nbash README
 
-This is the README for your extension "nbsh". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "nbash". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
