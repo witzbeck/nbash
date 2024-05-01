@@ -103,5 +103,11 @@
   },
   "dependencies": {
     "vscode": "^1.1.15"
+  },
+  "husky": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.ts": "tsc-files --noEmit"
   }
 }
